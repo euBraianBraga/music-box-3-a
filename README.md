@@ -1,5 +1,4 @@
-![REACT BOOTCAMP](https://user-images.githubusercontent.com/53583561/159532969-0d14db9b-71b7-4bcb-af4a-c7cfcf325cd6.png)
-
+![Group 2](https://user-images.githubusercontent.com/53722984/228359766-6595c300-f52c-4144-861c-4cb840be09cc.png)
 
 # Music Box 
 ![Badge](https://img.shields.io/badge/Code-react-0366d6?&logo=react) 
