@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-
+import Menu from "../components/Menu";
+import ItemMusica from "../components/ItemMusica";
 import api from "../api"; // importando a instância do Axios de "api.js"
 
 function Musicas() {
@@ -35,17 +36,24 @@ function Musicas() {
     <>
       {/* <button onClick={listar}>Listar Músicas</button> Você pode descomentar a função listar para ver o funcionamento no botão tbm */}
 
-      {
-        // percorrendo o vetor de músicas, onde para cada objeto, retorna um elemento div que usa os atributos daquele objeto de música (id e titulo)
-        // ao utilizar um vetor para criar objetos com o ".map()" devemos indicar qual será a chave (key) do elemento (que deve ser única), afim de identificar o elemento
-        listaMusicas.map((musica) => (
-          <div key={musica.id}>
-            Nome da musica: {musica.nome} <br />
-            Nome do Artista: {musica.artista}
-            <br /><br />
-          </div>
-        ))
-      }
+      <Menu />
+      <div class="container">
+        <div class="filter">
+          <button class="btn">Adicionar</button>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="music-boxes">
+          <ItemMusica
+            nome="Ela Partiu"
+            artista="Tim Maia"
+            genero="Musica da boa"
+            ano="antiga"
+            imagem="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6WVUxEWIaKiz_TPflALK1RSFRt4qaSPeFQ-CEGI7YCw&s"
+          />
+        </div>
+      </div>
       {/* 
                 Documentação do ".map()": 
                     - https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/map
