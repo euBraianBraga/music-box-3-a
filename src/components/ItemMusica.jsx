@@ -1,40 +1,82 @@
-import React from "react";
+import React, { useState } from "react";
+import capaPadrao from "../html-css-template/imagens/capa.png";
+import iconEdit from "../html-css-template/imagens/edit-icon.png";
+import iconDelete from "../html-css-template/imagens/delete-icon.png";
+import api from "../api";
 
 function ItemMusica(props) {
+  const [nomeInput, setNomeInput] = useState(props.nome);
+  const [artistaInput, setArtistaInput] = useState(props.artista);
+  const [generoInput, setGeneroInput] = useState(props.genero);
+  const [anoInput, setAnoInput] = useState(props.ano);
+
+  const estiloCard = {
+    backgroundImage: `url(${props.imagem ? props.imagem : capaPadrao})`
+  };
+  
+  function atualizarMusica() {
+    const musicaAtualizada = {
+      nome: nomeInput,
+      artista: artistaInput,
+      genero: generoInput,
+      ano: anoInput
+    };
+
+    api.put(`/${props.id}`, musicaAtualizada).then(() => {
+      alert("Musica atualizada com sucesso")
+    }).catch((error) => {
+      alert("Ocorreu um erro!", error)
+    })
+
+  }
 
   return (
     <>
-      <div class="card-music">
-        <div class="icons">
-          <img src="../imagens/edit-icon.png" alt="" />
-          <img src="../imagens/delete-icon.png" alt="" />
+      <div className="card-music" style={estiloCard}>
+        <div className="icons">
+          <img src={iconEdit} alt="" />
+          <img src={iconDelete} alt="" />
         </div>
-        <div class="info-music">
+        <div className="info-music">
           <p>
-            <strong class="card-title">música: </strong>
-            <input class="input-music-enable" type="text" value={props.nome} />
-          </p>
-          <p>
-            <strong class="card-title">artista: </strong>
+            <strong className="card-title">música: </strong>
             <input
-              class="input-music-enable"
+              onChange={(e) => setNomeInput(e.target.value)}
               type="text"
-              value={props.artista}
+              defaultValue={nomeInput}
+              className="input-music-enable"
             />
           </p>
           <p>
-            <strong class="card-title">categoria: </strong>
+            <strong className="card-title">artista: </strong>
             <input
-              class="input-music-enable"
+              onChange={(e) => setArtistaInput(e.target.value)}
+              className="input-music-enable"
               type="text"
-              value={props.genero}
+              defaultValue={artistaInput}
             />
           </p>
           <p>
-            <strong class="card-title">ano: </strong>
-            <input class="input-music-enable" type="text" value={props.ano} />
+            <strong className="card-title">categoria: </strong>
+            <input
+              onChange={(e) => setGeneroInput(e.target.value)}
+              className="input-music-enable"
+              type="text"
+              defaultValue={generoInput}
+            />
           </p>
-          <button class="btn-salvar-enable">Salvar</button>
+          <p>
+            <strong className="card-title">ano: </strong>
+            <input
+              onChange={(e) => setAnoInput(e.target.value)}
+              className="input-music-enable"
+              type="text"
+              defaultValue={anoInput}
+            />
+          </p>
+          <button onClick={atualizarMusica} className="btn-salvar-enable">
+            Salvar
+          </button>
         </div>
       </div>
     </>

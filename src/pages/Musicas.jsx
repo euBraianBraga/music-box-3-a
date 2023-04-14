@@ -37,21 +37,26 @@ function Musicas() {
       {/* <button onClick={listar}>Listar Músicas</button> Você pode descomentar a função listar para ver o funcionamento no botão tbm */}
 
       <Menu />
-      <div class="container">
-        <div class="filter">
-          <button class="btn">Adicionar</button>
+      <div className="container">
+        <div className="filter">
+          <button className="btn">Adicionar</button>
         </div>
       </div>
 
-      <div class="container">
-        <div class="music-boxes">
-          <ItemMusica
-            nome="Ela Partiu"
-            artista="Tim Maia"
-            genero="Musica da boa"
-            ano="antiga"
-            imagem="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6WVUxEWIaKiz_TPflALK1RSFRt4qaSPeFQ-CEGI7YCw&s"
-          />
+      <div className="container">
+        <div className="music-boxes">
+          {
+            listaMusicas.map((musica) => (
+              <ItemMusica
+                id={musica.id}
+                nome={musica.nome}
+                artista={musica.artista}
+                genero={musica.genero}
+                ano={musica.ano}
+                imagem={musica.imagem}
+            />
+            ))
+          }
         </div>
       </div>
       {/* 
