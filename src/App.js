@@ -1,9 +1,15 @@
-import Musicas from "./pages/Musicas";
+import Rotas from "./routes";
+import Menu from "./components/Menu";
 import "./html-css-template/css/reset.css"
 import "./html-css-template/css/style.css"
 
 function App() {
-  return <Musicas />;
+  return (
+    <>
+      <Menu />
+      <Rotas />
+    </>
+  );
 }
 
 export default App;

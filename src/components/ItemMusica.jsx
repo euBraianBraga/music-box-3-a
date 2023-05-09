@@ -10,10 +10,11 @@ function ItemMusica(props) {
   const [generoInput, setGeneroInput] = useState(props.genero);
   const [anoInput, setAnoInput] = useState(props.ano);
 
+  const [editing, setEditing] = useState(false);
   const estiloCard = {
     backgroundImage: `url(${props.imagem ? props.imagem : capaPadrao})`
   };
-  
+
   function atualizarMusica() {
     const musicaAtualizada = {
       nome: nomeInput,
@@ -22,19 +23,23 @@ function ItemMusica(props) {
       ano: anoInput
     };
 
-    api.put(`/${props.id}`, musicaAtualizada).then(() => {
-      alert("Musica atualizada com sucesso")
-    }).catch((error) => {
-      alert("Ocorreu um erro!", error)
-    })
+    api
+      .put(`/${props.id}`, musicaAtualizada)
+      .then(() => {
+        alert("Musica atualizada com sucesso");
+      })
+      .catch((error) => {
+        alert("Ocorreu um erro!", error);
+      });
 
+      setEditing(false);
   }
 
   return (
     <>
       <div className="card-music" style={estiloCard}>
         <div className="icons">
-          <img src={iconEdit} alt="" />
+          <img src={iconEdit} alt="" onClick={() => setEditing(true)} />
           <img src={iconDelete} alt="" />
         </div>
         <div className="info-music">
@@ -44,14 +49,16 @@ function ItemMusica(props) {
               onChange={(e) => setNomeInput(e.target.value)}
               type="text"
               defaultValue={nomeInput}
-              className="input-music-enable"
+              disabled={!editing}
+              className={editing ? "input-music-enable" : "input-music-disabled"}
             />
           </p>
           <p>
             <strong className="card-title">artista: </strong>
             <input
               onChange={(e) => setArtistaInput(e.target.value)}
-              className="input-music-enable"
+              disabled={!editing}
+              className={editing ? "input-music-enable" : "input-music-disabled"}
               type="text"
               defaultValue={artistaInput}
             />
@@ -60,7 +67,8 @@ function ItemMusica(props) {
             <strong className="card-title">categoria: </strong>
             <input
               onChange={(e) => setGeneroInput(e.target.value)}
-              className="input-music-enable"
+              disabled={!editing}
+              className={editing ? "input-music-enable" : "input-music-disabled"}
               type="text"
               defaultValue={generoInput}
             />
@@ -69,7 +77,8 @@ function ItemMusica(props) {
             <strong className="card-title">ano: </strong>
             <input
               onChange={(e) => setAnoInput(e.target.value)}
-              className="input-music-enable"
+              disabled={!editing}
+              className={editing ? "input-music-enable" : "input-music-disabled"}
               type="text"
               defaultValue={anoInput}
             />

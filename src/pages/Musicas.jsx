@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import Menu from "../components/Menu";
 import ItemMusica from "../components/ItemMusica";
 import api from "../api";
+import { useNavigate } from "react-router-dom";
 
 function Musicas() {
+  const navigate = useNavigate();
   const [listaMusicas, setListaMusicas] = useState([]);
 
   useEffect(() => {
@@ -21,27 +22,27 @@ function Musicas() {
 
   return (
     <>
-      <Menu />
       <div className="container">
         <div className="filter">
-          <button className="btn">Adicionar</button>
+          <button className="btn"
+           onClick={() => navigate("/adicionar")}>
+            Adicionar
+          </button>
         </div>
       </div>
 
       <div className="container">
         <div className="music-boxes">
-          {
-            listaMusicas.map((musica) => (
-              <ItemMusica
-                id={musica.id}
-                nome={musica.nome}
-                artista={musica.artista}
-                genero={musica.genero}
-                ano={musica.ano}
-                imagem={musica.imagem}
+          {listaMusicas.map((musica) => (
+            <ItemMusica
+              id={musica.id}
+              nome={musica.nome}
+              artista={musica.artista}
+              genero={musica.genero}
+              ano={musica.ano}
+              imagem={musica.imagem}
             />
-            ))
-          }
+          ))}
         </div>
       </div>
     </>
